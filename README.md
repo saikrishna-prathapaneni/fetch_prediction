@@ -40,9 +40,11 @@ To run the Flask app in a Docker container:
 
 Visit `http://localhost:5000` in your web browser to access the app.
 
+The app requests for a date to be entered, pass the appropriate date to get the predictions.
+
 ### Training the Model
 
-To train the model, you can run the `train.py` script in a Docker container:
+The mode is trained and model weights are present in `model_weights` folder, yet if you want to train the model, you can run the `train.py [OPTIONS]` script in a Docker container:
 
 1. Ensure you have the necessary `data_daily` available in the parent directory.
 
@@ -50,6 +52,7 @@ To train the model, you can run the `train.py` script in a Docker container:
     ```
     docker run -v $(pwd)/model_weights:/usr/src/app/model_weights -it fetch_receipt:latest python train.py
     ```
+    
 ### Parameter for Training the Model
 1.  `--datafile` (default: "data_daily.csv")
     Description: Specify the location of the data file.
