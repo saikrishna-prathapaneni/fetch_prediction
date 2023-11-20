@@ -33,9 +33,6 @@ joblib==1.2.0
 kiwisolver==1.4.5
 lazy_loader==0.2
 librosa==0.10.0.post2
-lightly==1.4.10
-lightly-utils==0.0.2
-lightning-utilities==0.9.0
 llvmlite==0.40.1
 Markdown==3.4.3
 MarkupSafe==2.1.2
@@ -62,7 +59,6 @@ pyasn1-modules==0.3.0
 pycparser==2.21
 pydantic==1.10.9
 pyparsing==3.1.1
-pytorch-lightning==2.0.4
 pytz==2023.3
 pywin32==305.1
 PyYAML==6.0
@@ -86,7 +82,6 @@ torchaudio==2.0.1+cu118
 torchmetrics==0.11.4
 torchvision==0.15.1+cu118
 tqdm==4.65.0
-transformers==4.30.2
 typing_extensions==4.4.0
 tzdata==2023.3
 urllib3==1.26.13
