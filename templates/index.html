@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Web App - Predict the Receipt Count</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #warningDiv {
+            color: red;
+            margin-top: 10px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="date"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Add this within the head tag -->
+
+
+</head>
+<body>
+    <h1> Predict the Receipt Count</h1>
+    <h2> Enter date on or after 2022-01-01, model returns aggregation to that day in that particular month</h2>
+
+    <h3> To get monthly aggregation please select last day of that particular month</h3>
+
+    <form id="dateForm" method="POST" onsubmit="return validateDate()">
+        <input type="date" name="date" id="usr_date">
+        <input type="submit" value="Submit">
+    </form>
+    <div id="warningDiv"></div>
+
+    <h2>Estimated receipt count for the month of following date and till <h2 id="monthDiv">{{date_input}}</h2>: </h2>
+    
+
+    {% if result %}
+        <h2><b>{{ result }}</b></h2>
+    {% endif %}
+    
+   
+
+    <canvas id="myChart" width="400" height="200"></canvas> <!-- Canvas for Chart.js -->
+    
+    
+
+   
+    <!-- Update the canvas tag -->
+<canvas id="myChart" width="500" height="300" style="padding: 3px;"></canvas>
+
+    <script>
+       
+        function validateDate() {
+            var dateInput = document.getElementById('usr_date').value;
+            var warningDiv = document.getElementById('warningDiv');
+         
+            var selectedDate = new Date(dateInput);
+            // Check if the date is beyond 2022
+            if (new Date(dateInput) > new Date('2022-12-31')) {
+                warningDiv.textContent = 'Date range too long, results may not be reliable.';
+                return false; // Prevent form submission
+            } else if (new Date(dateInput) < new Date('2022-01-01')) {
+                warningDiv.textContent = 'Date range too short, please select the data after 2022-01-01';
+                return false;
+            } else {
+                warningDiv.textContent = ''; // Clear warning if date is within range
+       
+    
+                return true; // Allow form submission
+            }
+        
+        
+
+    
+        }
+        function createChart(receiptCounts, dates) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        // var months = data.map(entry => entry['month']); // Extract months from data
+        // var receiptCounts = data.map(entry => entry['receipt_count']); // Extract receipt counts from data
+        var backgroundColors = [];
+        var borderColors = [];
+
+        // Extract year from each date and assign colors based on the year
+        var legends = {};
+
+        // Extract year from each date and assign colors based on the year
+        dates.forEach(date => {
+            var year = new Date(date).getFullYear();
+            if (year === 2022) {
+                backgroundColors.push('rgba(255, 99, 132, 0.6)'); // Red color for 2022
+                borderColors.push('rgba(255, 99, 132, 1)');
+                legends['2022'] = true; // Label for 2022
+            } else if (year === 2023) {
+                backgroundColors.push('rgba(54, 162, 235, 0.6)'); // Blue color for 2023
+                borderColors.push('rgba(54, 162, 235, 1)');
+                legends['2023'] = true; // No label for other years
+            } else {
+                // Default color for other years
+                backgroundColors.push('rgba(255, 206, 86, 0.6)'); // Yellow color for other years
+                borderColors.push('rgba(255, 206, 86, 1)');
+                legends['Other Years'] = true;// No label for other years
+            }
+        });
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: '2021 Receipt Count',
+                    data: receiptCounts,
+                    backgroundColor: backgroundColors,
+                    borderColor: borderColors,
+                    borderWidth: 1,
+                    
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    labels: {
+                        filter: function (legendItem, chartData) {
+                            return legends[legendItem.text];
+                        }
+                    }
+                }
+            },
+            scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+        });
+    }
+
+    // Modify this part to pass the historical_data to the createChart function
+    {% if result %}
+        createChart({{ all_data | tojson }}, {{ time_series_return | tojson }});
+    {% endif %}
+
+    </script>
+
+
+</body>
+</html>
