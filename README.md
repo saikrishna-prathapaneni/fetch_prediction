@@ -44,11 +44,11 @@ Visit `http://localhost:5000` in your web browser to access the app.
 
 To train the model, you can run the `train.py` script in a Docker container:
 
-1. Ensure you have the necessary data available in the `model_weights` directory.
+1. Ensure you have the necessary `data_daily` available in the parent directory.
 
 2. Run the Docker container with a volume to persist model weights:
     ```
-    docker run -v $(pwd)/model_weights:/usr/src/app/model_weights -it yourappname:latest python train.py
+    docker run -v $(pwd)/model_weights:/usr/src/app/model_weights -it fetch_receipt:latest python train.py
     ```
 
 ## Development
