@@ -1,6 +1,6 @@
 # Receipt Count Prediction
 
-The Following code predicts the count of receipts for any month in 2023. In addition the visualisation presented also presents day by day prediction receipt count.
+The Following code predicts the count of receipts for any month in 2023. In addition, the visualization presented also presents day-by-day prediction receipt count.
 
 ## Prerequisites
 
@@ -14,12 +14,12 @@ To install the project, follow these steps:
 
 1. Clone the repository to your local machine:
     ```
-    git clone https://yourrepository.git
+    git clone https://github.com/saikrishna-prathapaneni/fetch_prediction.git
     ```
 
 2. Navigate to the project directory:
     ```
-    cd your-project
+    cd fetch_prediction
     ```
 
 ## Usage
@@ -30,12 +30,12 @@ To run the Flask app in a Docker container:
 
 1. Build the Docker image:
     ```
-    docker build -t yourappname:latest .
+    docker build -t fetch_receipt:latest .
     ```
 
 2. Run the Docker container:
     ```
-    docker run -p 5000:5000 yourappname:latest
+    docker run -p 5000:5000 fetch_receipt:latest
     ```
 
 Visit `http://localhost:5000` in your web browser to access the app.
