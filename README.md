@@ -50,8 +50,28 @@ To train the model, you can run the `train.py` script in a Docker container:
     ```
     docker run -v $(pwd)/model_weights:/usr/src/app/model_weights -it fetch_receipt:latest python train.py
     ```
+### Parameter for Training the Model
+1.  `--datafile` (default: "data_daily.csv")
+    Description: Specify the location of the data file.
+2.  `--include_l2reg` (default: False)
+    Description: Use L2 regularization during model training.
+4.  `--include_l1reg` (default: False)
+    Description: Use L1 regularization during model training.
+5.  `--l1_lambda` (default: 0.001)
+    Description: Set the value of lambda for L1 regularization.
+6.  `--l2_lambda` (default: 0.003)
+    Description: Set the value of lambda for L2 regularization.
+7.  `--lr` (default: 0.01)
+    Description: Set the learning rate for training the model.
+8.  `--batch_size` (default: 8)
+    Description: Specify the batch size for training the model.
+9.  `--epochs` (default: 20)
+    Description: Set the number of epochs for training the model.
+## Further Development
 
-## Development
+1. While the Model used here is simple, yet the features extracted are highly correlated with the variable of interest with a **added interpretability** nature associated to it
+2. The Model used here is Linear Regression which not suitable for Time series analysis (Testing with LSTM, XGboost is necessary) yet due to constraint in the data size available, I pursuied Linear Regreesion with regualrisers in place, with some great features
+3. Abalation study is not done with all the epoch sizes and learning rates in addition to regalarisers, comprehensive evaluation is needed here
 
-For development purposes, you can mount the whole project directory to the container to reflect live changes:
+
 
