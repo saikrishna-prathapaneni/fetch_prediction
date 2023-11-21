@@ -59,7 +59,7 @@ you can create a venv with python3.9 and run, follow the steps below.
    ```
 3. Install Dependencies
    move to the parent directory of the app (cd fetch_prediction)
-   # Install dependencies from requirements.txt (May take a while)
+   nstall dependencies from requirements.txt (May take a while)
     ```
    pip install -r requirements.txt
 
