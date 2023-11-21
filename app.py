@@ -72,7 +72,6 @@ data_2021 = pd.read_csv('data_daily.csv')
 
 @app.route('/',methods=['GET','POST'])
 def index():
-    # try:
         if request.method == 'POST':
             date_input = request.form['date']
    
@@ -119,10 +118,7 @@ def index():
             time_series_return = your_data['Year'].astype(str) + "-" + your_data['Month'].astype(str)+"-" +your_data['Day'].astype(str)
             all_data = your_data['Receipt_Count']
             print(time_series_return)
-            # data = {
-            #     'prediction': str(int(predicted_receipts_for_month)),
-            #     'historical_data': your_data.to_dict(orient='records')
-            # }
+      
             print(predicted_receipts_for_month)
             return render_template('index.html', result=predicted_data,
                                     time_series_return =time_series_return.to_list(),
@@ -131,10 +127,6 @@ def index():
         else:
             return render_template('index.html')
 
-        #return jsonify(data)
-    # except Exception as e:
-
-    #     return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
