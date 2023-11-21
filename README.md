@@ -28,7 +28,7 @@ To install the project, follow these steps:
 
 To run the Flask app in a Docker container:
 
-1. Build the Docker image:
+1. Build the Docker image: (May take a while)
     ```
     docker build -t fetch_receipt:latest .
     ```
@@ -40,13 +40,44 @@ To run the Flask app in a Docker container:
 
 Visit `http://localhost:5000` in your web browser to access the app.
 
+alternatively,
+
+you can create a venv with python3.9 and run, follow the steps below.
+
+1. Open a terminal or command prompt and navigate to your project directory.
+    ```
+    python3.9 -m venv venv
+    ```
+2. Activate the Virtual Environment
+   for Windows
+   ```
+   venv\Scripts\activate
+   ```
+   for Ubuntu/MacOS
+   ```
+   source venv\Scripts\activate
+   ```
+3. Install Dependencies
+   move to the parent directory of the app (cd fetch_prediction)
+   # Install dependencies from requirements.txt (May take a while)
+    ```
+   pip install -r requirements.txt
+
+    ```
+4. Run the application, you will have the app running at `http://localhost:5000`:
+    ```
+   python app.py
+    ```
+   
+
+
 The app requests for a date to be entered, pass the appropriate date to get the predictions.
 
 ### Training the Model
 
 The mode is trained and model weights are present in `model_weights` folder, yet if you want to train the model, you can run the `train.py [OPTIONS]` script in a Docker container:
 
-1. Ensure you have the necessary `data_daily` available in the parent directory.
+1. Ensure you have the necessary `data_daily.csv` available in the parent directory.
 
 2. Run the Docker container with a volume to persist model weights:
     ```
@@ -74,7 +105,7 @@ The mode is trained and model weights are present in `model_weights` folder, yet
 
 1. While the Model used here is simple, yet the features extracted are highly correlated with the variable of interest with a **added interpretability** nature associated to it
 2. The Model used here is Linear Regression which not suitable for Time series analysis (Testing with LSTM, XGboost is necessary) yet due to constraint in the data size available, I pursuied Linear Regreesion with regualrisers in place, with some great features
-3. Abalation study is not done with all the epoch sizes and learning rates in addition to regalarisers, comprehensive evaluation is needed here
+3. Abalation study is not done with all the epoch sizes and learning rates in addition to regalarisers, comprehensive evaluation is needed here, for best fit.
 
 
 
